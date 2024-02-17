@@ -1,0 +1,1 @@
+/** Common components used accross the application such as buttons, inputs, modals, product cards, etc. */

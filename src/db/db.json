@@ -1,0 +1,104 @@
+{
+  "cakes": [
+    {
+      "id": 1,
+      "name": "Vanilla Cake",
+      "price": 14.99,
+      "stock": 11,
+      "image": "https://example.com/images/vanilla-cake.jpg",
+      "description": "Classic vanilla cake with velvety vanilla buttercream.",
+      "rating": "4.5"
+    },
+    {
+      "id": 2,
+      "name": "Chocolate Heaven",
+      "price": 18.99,
+      "stock": 5,
+      "image": "https://example.com/images/chocolate-heaven.jpg",
+      "description": "Decadent chocolate cake with layers of chocolate ganache.",
+      "rating": "4.8"
+    },
+    {
+      "id": 3,
+      "name": "Classic Cheesecake",
+      "price": 20.0,
+      "stock": 7,
+      "image": "https://example.com/images/classic-cheesecake.jpg",
+      "description": "Smooth and creamy cheesecake with a graham cracker crust.",
+      "rating": "4.7"
+    },
+    {
+      "id": 4,
+      "name": "Carrot Cake",
+      "price": 17.5,
+      "stock": 8,
+      "image": "https://example.com/images/carrot-cake.jpg",
+      "description": "Moist carrot cake with walnuts and a smooth cream cheese frosting.",
+      "rating": "4.6"
+    },
+    {
+      "id": 5,
+      "name": "Strawberry Shortcake",
+      "price": 16.75,
+      "stock": 12,
+      "image": "https://example.com/images/strawberry-shortcake.jpg",
+      "description": "Light and fluffy shortcake with fresh strawberries and whipped cream.",
+      "rating": "4.7"
+    },
+    {
+      "id": 6,
+      "name": "Lemon Pie",
+      "price": 15.0,
+      "stock": 9,
+      "image": "https://example.com/images/lemon-pie.jpg",
+      "description": "Tart and refreshing lemon pie with a buttery crust and meringue topping.",
+      "rating": "4.6"
+    }
+  ],  
+    "users": [
+      {
+        "id": 1,
+        "name": "random_user_1",
+        "password": "RandomPassword1!",
+        "email": "random_user_1@example.com",
+        "cart": []
+      },
+      {
+        "id": 2,
+        "name": "random_user_2",
+        "password": "RandomPassword2!",
+        "email": "random_user_2@example.com",
+        "cart": []
+      },
+      {
+        "id": 3,
+        "name": "random_user_3",
+        "password": "RandomPassword3!",
+        "email": "random_user_3@example.com",
+        "cart": []
+      },
+      {
+        "id": 4,
+        "name": "random_user_4",
+        "password": "RandomPassword4!",
+        "email": "random_user_4@example.com",
+        "cart": []
+      },
+      {
+        "id": 5,
+        "name": "random_user_5",
+        "password": "RandomPassword5!",
+        "email": "random_user_5@example.com",
+        "cart": []
+      },
+      {
+        "id": 6,
+        "name": "random_user_6",
+        "password": "RandomPassword6!",
+        "email": "random_user_6@example.com",
+        "cart": []
+      }
+    ]
+  }
+  
+
