@@ -1,5 +1,6 @@
 import { getData } from "../../../services";
-import './home.css'
+import "./home.css";
+import "/src/App.css";
 
 export interface Cake {
   id: number;
@@ -73,11 +74,12 @@ const cakes = [
 
 function CakeObj({ cake }: { cake: Cake }) {
   return (
-    <li>
-      <img src={cake.image} className="cake-image"/>
-      <div>{cake.name}</div>
-      <p>{cake.description}</p>
-      <span>{cake.price}</span>
+    <li className="cake-li">
+      <div className="image-container">
+        <img src={cake.image} className="cake-image" />
+      </div>
+      <h4>{cake.price} €</h4>
+      <h4>{cake.name}</h4>
     </li>
   );
 }

@@ -1,8 +1,43 @@
 .cake-image{
-   width: 115px;
-   height: 95px; 
+   width: 70px;
+   height: 70px;
+   margin-bottom: 1rem;
 }
 
 ul{
     list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    gap: 0.5rem;
+    padding-left: 0;
+    padding-top: 1rem;
+}
+
+.cake-li{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
+    text-align: left;
+    height: 215px;
+    width: 161px;
+    border-radius: 5%;
+    background-image: linear-gradient(#FFA6BD, #ffffff);
+    padding: 0.2rem;
+    
+}
+
+.image-container{
+    display: flex;
+    justify-content: center;
+}
+
+h4{
+    padding-left: 0.5rem;
+}
+
+
+.cake-description{
+    font-size: 0.8rem;
 }

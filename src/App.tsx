@@ -1,14 +1,17 @@
-import './App.css'
-import CakeObjList from './pages/Home/Components'
+import "./App.css";
+import Main from "./components/Main";
+import CakeObjList from "./pages/Home/Components";
 
 const cakesURL = "http://localhost:3000/cakes";
 
 function App() {
   return (
-    <>     
-        <CakeObjList url={cakesURL}/>
-          </>
-  )
+    <>
+      <Main>
+        <CakeObjList url={cakesURL} />
+      </Main>
+    </>
+  );
 }
 
-export default App
+export default App;
