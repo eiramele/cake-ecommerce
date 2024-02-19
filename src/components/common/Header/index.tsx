@@ -1,13 +1,17 @@
 /** At the top we will have all required imports */
-import './header.css';
+import "./header.css";
 
-/** Important: Remember the component will always have to start with a capital letter */
 const Header = () => {
   return (
-    <>
-      <div>Header</div>
-    </>
+    <div className="header">
+      <Logo />
+      <div className="title">Bcn Cakes</div>
+    </div>
   );
+};
+
+const Logo = () => {
+  return <img src="src/assets/cakeApp_logo.webp" className="logo-image"/>;
 };
 
 export default Header;

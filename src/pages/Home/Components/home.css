@@ -1,43 +1,64 @@
-.cake-image{
-   width: 70px;
-   height: 70px;
-   margin-bottom: 1rem;
+.cake-image {
+  width: 70px;
+  height: 70px;
+  margin-bottom: 1rem;
 }
 
-ul{
-    list-style: none;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    gap: 0.5rem;
-    padding-left: 0;
-    padding-top: 1rem;
+ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  gap: 0.5rem;
+  padding-left: 0;
+  padding-top: 1rem;
 }
 
-.cake-li{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    
-    text-align: left;
-    height: 215px;
-    width: 161px;
-    border-radius: 5%;
-    background-image: linear-gradient(#FFA6BD, #ffffff);
-    padding: 0.2rem;
-    
+.cake-li {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: var(--text-color);
+  text-align: left;
+  height: 215px;
+  width: 161px;
+  border-radius: 5%;
+  background-image: linear-gradient(
+    var(--cake-gradient-first-color),
+    var(--cake-gradient-second-color)
+  );
+  padding: 0.2rem;
+  margin-bottom: 0.5rem;
 }
 
-.image-container{
-    display: flex;
-    justify-content: center;
+.image-container {
+  display: flex;
+  justify-content: center;
 }
 
-h4{
-    padding-left: 0.5rem;
+h4 {
+  padding-left: 0.5rem;
 }
 
+.cake-description {
+  font-size: 0.8rem;
+}
 
-.cake-description{
-    font-size: 0.8rem;
+.select-quantity {
+  width: 3rem;
+  margin: 0.3rem;
+}
+
+.quantity-container {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.add-to-cart--button {
+  background-color: var(--button-color);
+  color: white;
+  height: 30px;
+  align-self: center;
+  padding-top: 0.2rem;
 }

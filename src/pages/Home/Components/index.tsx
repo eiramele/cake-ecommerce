@@ -1,6 +1,8 @@
+import { useState } from "react";
 import { getData } from "../../../services";
 import "./home.css";
 import "/src/App.css";
+import Button from "../../../components/common/Button";
 
 export interface Cake {
   id: number;
@@ -52,7 +54,7 @@ const cakes = [
   },
   {
     id: "5",
-    name: "Strawberry Shortcake",
+    name: "Strawberry Cake",
     price: 16.75,
     stock: 12,
     image: "src/assets/images/strawberry-cake.webp",
@@ -80,6 +82,7 @@ function CakeObj({ cake }: { cake: Cake }) {
       </div>
       <h4>{cake.price} €</h4>
       <h4>{cake.name}</h4>
+      <SelectQuantityContainer />
     </li>
   );
 }
@@ -92,4 +95,35 @@ export default function CakeObjList() {
       ))}
     </ul>
   );
+}
+
+function SelectQuantityContainer() {
+  return (
+    <div className="quantity-container">
+      <SelectQuantity />
+      <AddToCartButton />
+    </div>
+  );
+}
+
+function SelectQuantity() {
+  const [quantity, setQuantity] = useState<number>(1);
+
+  return (
+    <select
+      className="select-quantity"
+      value={quantity}
+      onChange={(e) => setQuantity(Number(e.target.value))}
+    >
+      {Array.from({ length: 10 }, (_, i) => i + 1).map((num) => (
+        <option value={num} key={num}>
+          {num}
+        </option>
+      ))}
+    </select>
+  );
+}
+
+function AddToCartButton() {
+  return <Button className="add-to-cart--button">Add</Button>;
 }

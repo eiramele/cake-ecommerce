@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Kavoon&display=swap');
+
+.header{
+    display: flex;
+    justify-content: center;
+    margin: 0.5rem;
+    gap: 1rem;
+    font-family: "Kavoon";
+    color: var(--title-color);
+    
+}
+
+.title{
+    padding-top: 1rem;
+}
+
+.logo-image{
+    height: 3rem;
+    width: 3.5rem;
+    border-radius: 45%;
+}
