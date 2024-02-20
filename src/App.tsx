@@ -5,9 +5,11 @@ import Header from "./components/common/Header";
 import SearchandAddToCart from "./components/layout";
 import CakeObjList from "./pages/Home/Components";
 
+
 const cakesURL = "http://localhost:3000/cakes";
 
 function App() {
+  
   return (
     <>
     <Header/>
