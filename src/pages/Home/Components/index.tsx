@@ -1,8 +1,10 @@
-import { useState } from "react";
-import { getData } from "../../../services";
+import { useContext, useEffect, useState } from "react";
+// import { getCakes, getData } from "../../../services";
 import "./home.css";
 import "/src/App.css";
 import Button from "../../../components/common/Button";
+import { getData } from "../../../services";
+import { CartContext } from "../../../context";
 
 export interface Cake {
   id: number;
@@ -14,65 +16,73 @@ export interface Cake {
   rating: string;
 }
 
-const cakes = [
-  {
-    id: "1",
-    name: "Vanilla Cake",
-    price: 14.99,
-    stock: 11,
-    image: "src/assets/images/vanilla-cake.webp",
-    description: "Classic vanilla cake with velvety vanilla buttercream.",
-    rating: "4.5",
-  },
-  {
-    id: "2",
-    name: "Chocolate Heaven",
-    price: 18.99,
-    stock: 5,
-    image: "src/assets/images/chocolate-cake.webp",
-    description: "Decadent chocolate cake with layers of chocolate ganache.",
-    rating: "4.8",
-  },
-  {
-    id: "3",
-    name: "Classic Cheesecake",
-    price: 20,
-    stock: 7,
-    image: "src/assets/images/cheesecake.webp",
-    description: "Smooth and creamy cheesecake with a graham cracker crust.",
-    rating: "4.7",
-  },
-  {
-    id: "4",
-    name: "Carrot Cake",
-    price: 17.5,
-    stock: 8,
-    image: "src/assets/images/carrot-cake.webp",
-    description:
-      "Moist carrot cake with walnuts and a smooth cream cheese frosting.",
-    rating: "4.6",
-  },
-  {
-    id: "5",
-    name: "Strawberry Cake",
-    price: 16.75,
-    stock: 12,
-    image: "src/assets/images/strawberry-cake.webp",
-    description:
-      "Light and fluffy shortcake with fresh strawberries and whipped cream.",
-    rating: "4.7",
-  },
-  {
-    id: "6",
-    name: "Lemon Pie",
-    price: 15,
-    stock: 9,
-    image: "src/assets/images/lemon-pie.webp",
-    description:
-      "Tart and refreshing lemon pie with a buttery crust and meringue topping.",
-    rating: "4.6",
-  },
-];
+export interface CakeWithQuantity extends Cake {
+  quantity: number;  
+}
+
+interface CakeListProps {
+  url: string;
+}
+
+// const cakes = [
+//   {
+//     id: "1",
+//     name: "Vanilla Cake",
+//     price: 14.99,
+//     stock: 11,
+//     image: "src/assets/images/vanilla-cake.webp",
+//     description: "Classic vanilla cake with velvety vanilla buttercream.",
+//     rating: "4.5",
+//   },
+//   {
+//     id: "2",
+//     name: "Chocolate Heaven",
+//     price: 18.99,
+//     stock: 5,
+//     image: "src/assets/images/chocolate-cake.webp",
+//     description: "Decadent chocolate cake with layers of chocolate ganache.",
+//     rating: "4.8",
+//   },
+//   {
+//     id: "3",
+//     name: "Classic Cheesecake",
+//     price: 20,
+//     stock: 7,
+//     image: "src/assets/images/cheesecake.webp",
+//     description: "Smooth and creamy cheesecake with a graham cracker crust.",
+//     rating: "4.7",
+//   },
+//   {
+//     id: "4",
+//     name: "Carrot Cake",
+//     price: 17.5,
+//     stock: 8,
+//     image: "src/assets/images/carrot-cake.webp",
+//     description:
+//       "Moist carrot cake with walnuts and a smooth cream cheese frosting.",
+//     rating: "4.6",
+//   },
+//   {
+//     id: "5",
+//     name: "Strawberry Cake",
+//     price: 16.75,
+//     stock: 12,
+//     image: "src/assets/images/strawberry-cake.webp",
+//     description:
+//       "Light and fluffy shortcake with fresh strawberries and whipped cream.",
+//     rating: "4.7",
+//   },
+//   {
+//     id: "6",
+//     name: "Lemon Pie",
+//     price: 15,
+//     stock: 9,
+//     image: "src/assets/images/lemon-pie.webp",
+//     description:
+//       "Tart and refreshing lemon pie with a buttery crust and meringue topping.",
+//     rating: "4.6",
+//   },
+// ];
 
 function CakeObj({ cake }: { cake: Cake }) {
   return (
@@ -82,32 +92,81 @@ function CakeObj({ cake }: { cake: Cake }) {
       </div>
       <h4>{cake.price} €</h4>
       <h4>{cake.name}</h4>
-      <SelectQuantityContainer />
+      <SelectQuantityContainer cake={cake} />
     </li>
   );
 }
 
-export default function CakeObjList() {
+export const CakeObjList: React.FC<CakeListProps> = ({url}) => {
+  const [cakes, setCakes] = useState<Cake[] | null>([]);
+
+  // useEffect(function () {
+  //   async function fetchCakes() {
+  //     try {
+  //       const data = await getData(url);
+  //      console.log(data)
+
+  //       setCakes(data);
+  //     } catch (error) {
+  //       console.error("Error loading content", error);
+  //       return null;
+  //     }
+  //   }
+  //   fetchCakes();
+  // },[url]);
+  
+  useEffect(function () {
+    async function fetchCakes() {
+      try {
+        const data = await getData(url);
+        // const data = await response.json();
+
+        setCakes(data);
+      } catch (error) {
+        console.error("Error loading content", error);
+        return null;
+      }
+    }
+    fetchCakes();
+  },[url]);
+  
+  
   return (
     <ul>
-      {cakes.map((cake) => (
+      {cakes?.map((cake) => (
         <CakeObj cake={cake} key={cake.id} />
       ))}
     </ul>
   );
 }
 
-function SelectQuantityContainer() {
+function SelectQuantityContainer({cake}:{cake:Cake}) {
+  
+  
   return (
     <div className="quantity-container">
-      <SelectQuantity />
+      <SelectQuantity cake={cake}/>
       <AddToCartButton />
     </div>
   );
 }
 
-function SelectQuantity() {
+function SelectQuantity({cake}:{cake:Cake}) {
   const [quantity, setQuantity] = useState<number>(1);
+  const {cart, setCart} = useContext(CartContext)
+  
+  const addToCart = () => {
+    
+    const existingCake = cart.find(item => item.id === cake.id);
+    
+    if(existingCake){
+      const updatedCart = cart.map(item => {
+        if (item.id === cake.id) {
+          return { ...item, quantity: item.quantity + quantity }; 
+        }
+        return item);
+    }
+  };
 
   return (
     <select
