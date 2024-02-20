@@ -2,17 +2,17 @@
 
 import { createContext, useState, useContext } from "react";
 
-import { Cake } from "../pages/Home/Components";
+import { Cake, CakeWithQuantity } from "../pages/Home/Components";
 
 interface CartContextType {
-  cart: Cake[];
-  setCart: React.Dispatch<React.SetStateAction<Cake[]>>;
+  cart: CakeWithQuantity[];
+  setCart: React.Dispatch<React.SetStateAction<CakeWithQuantity[]>>;
 }
 
 export const CartContext = createContext<CartContextType | undefined> (undefined);
 
 export function CartContextProvider({children}) {
-  const [cart, setCart] = useState<Cake[]>([]);
+  const [cart, setCart] = useState<CakeWithQuantity[]>([]);
 
   const value = { cart, setCart };
 
