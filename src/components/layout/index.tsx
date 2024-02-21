@@ -1,9 +1,10 @@
-import { CakeCart } from "../../pages/Checkout/Components";
+import { CakeCardTotal } from "../../pages/Checkout/Components";
 import { CakeObjList } from "../../pages/Home/Components";
 import Main from "../Main";
 import CartIcon from "../common/CartIcon/cart.css";
 import Header from "../common/Header";
 import SearchBar from "../common/SearchBar";
+
 
 const cakesURL: string = "http://localhost:3000/cakes";
 
@@ -24,7 +25,7 @@ export function CheckoutPage() {
     <>
       <Header />
       <Main>
-        <CakeCart />
+        <CakeCardTotal />
       </Main>
     </>
   );

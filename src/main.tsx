@@ -2,12 +2,14 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
-import {CartContextProvider} from "./context";
+import { CartContextProvider } from "./context";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <CartContextProvider>
-      <App />
+  
+        <App />
+     
     </CartContextProvider>
   </React.StrictMode>
 );

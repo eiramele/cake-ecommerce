@@ -1,0 +1,39 @@
+.product-info__container {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+  padding-left: 1rem;
+  padding-right: 0.5rem;
+  padding-top: 0.3rem;
+  padding-bottom: 0.3rem;
+  align-items: center;
+  background-image: linear-gradient(
+    to right,
+    var(--cake-gradient-second-color),
+    var(--cake-gradient-first-color)
+  );
+  border-radius: 0.6rem;
+}
+
+.cake-image--mini {
+  height: 2rem;
+  width: 2rem;
+}
+
+
+.quantity-price-info{
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.change-quantity-button{
+  display: flex;
+  justify-content: center;
+ align-items: center;
+  background-color: var(--button-color);
+  cursor: pointer;
+  padding: 0.3rem;
+  border-radius: 50%;
+  height: 1.2rem;
+  width: 1.2rem;
+}

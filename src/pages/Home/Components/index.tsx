@@ -1,10 +1,10 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 // import { getCakes, getData } from "../../../services";
 import "./home.css";
 import "/src/App.css";
 import Button from "../../../components/common/Button";
 import { getData } from "../../../services";
-import { CartContext } from "../../../context";
+import { CartContextType, useCartContext } from "../../../context";
 
 export interface Cake {
   id: number;
@@ -67,31 +67,35 @@ export const CakeObjList: React.FC<CakeListProps> = ({ url }) => {
   );
 };
 
-
-function SelectQuantity( {cake}: { cake: Cake } ) {
+function SelectQuantity({ cake }: { cake: Cake }) {
   const [quantity, setQuantity] = useState<number>(1);
+  
+  const contextCart = useCartContext();
+  
+  
+  // const addToCart = () => {
+  //   if (contextCart) {
+  //     const { cart, setCart } = contextCart;
+      
 
-  const context = useContext(CartContext);
-  const addToCart = () => {
-    if (context) {
-      const { cart, setCart } = context;
+  //     const cakeWithQuantity: CakeWithQuantity = { ...cake, quantity };
+  //     const existingCakeIndex = cart.findIndex(
+  //       (item) => item.id === cakeWithQuantity.id
+  //     );
 
-      const cakeWithQuantity: CakeWithQuantity = { ...cake, quantity };
-      const existingCakeIndex = cart.findIndex(
-        (item) => item.id === cakeWithQuantity.id
-      );
+  //     if (existingCakeIndex >= 0) {
+  //       const updatedCart = [...cart];
+  //       updatedCart[existingCakeIndex].quantity += cakeWithQuantity.quantity;
 
-      if (existingCakeIndex >= 0) {
-        const updatedCart = [...cart];
-        updatedCart[existingCakeIndex].quantity += cakeWithQuantity.quantity;
-        setCart(updatedCart);
-      } else {
-        setCart([...cart, cakeWithQuantity]);
-      }
-    }
-  };
+  //       setCart(updatedCart);
+  //     } else {
+  //       setCart([...cart, cakeWithQuantity]);
+  //     }
+  //   }
+  // };
 
   return (
+    
     <div className="quantity-container">
       <select
         className="select-quantity"
@@ -104,13 +108,32 @@ function SelectQuantity( {cake}: { cake: Cake } ) {
           </option>
         ))}
       </select>
-      <Button className="add-to-cart--button" onClick={addToCart}>
+      <Button className="add-to-cart--button" onClick={()=>addToCart(contextCart, cake, quantity,)}>
         Add
       </Button>
     </div>
   );
 }
 
-// function AddToCartButton() {
-//   return ;
-// }
+
+
+export const addToCart = (contextCart:CartContextType, cake:Cake, quantity:number) => {
+  if (contextCart) {
+    const { cart, setCart } = contextCart;
+    
+
+    const cakeWithQuantity: CakeWithQuantity = { ...cake, quantity };
+    const existingCakeIndex = cart.findIndex(
+      (item) => item.id === cakeWithQuantity.id
+    );
+
+    if (existingCakeIndex >= 0) {
+      const updatedCart = [...cart];
+      updatedCart[existingCakeIndex].quantity += cakeWithQuantity.quantity;
+
+      setCart(updatedCart);
+    } else {
+      setCart([...cart, cakeWithQuantity]);
+    }
+  }
+};
