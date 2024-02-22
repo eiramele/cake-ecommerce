@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { CartContext } from "../../../context";
 import { CakeWithQuantity, addToCart } from "../../Home/Components";
 import "./checkout.css";
@@ -7,10 +7,17 @@ import Button from "../../../components/common/Button";
 
 export function CakeCardTotal() {
   const context = useContext(CartContext);
+  const [value, setValue] = useState("0");
 
   if (context) {
     const { cart } = context;
-    console.log(cart);
+
+    const subtotal = formatNumber(
+      cart.reduce((acc, cake) => acc + cake.price * cake.quantity, 0)
+    );
+    const shipment = value === "0" ? 0 : 3;
+
+    const total = Number(subtotal) + shipment;
 
     if (cart.length === 0) {
       return <div>Your cart is empty</div>;
@@ -22,10 +29,17 @@ export function CakeCardTotal() {
           {cart.map((cake) => (
             <CakeCard key={cake.id} cake={cake} />
           ))}
-          Subtotal:{" "}
-          {formatNumber(
-            cart.reduce((acc, cake) => acc + cake.price * cake.quantity, 0)
-          )}
+
+          <div className="shipment-toggle">
+            <span>Pick up in store</span>
+            <ToggleButton value={value} setValue={setValue} />
+            <span>{`Home delivery (+3 €)`}</span>
+          </div>
+          <div>
+            <p> Subtotal: {`${subtotal} €`}</p>
+            <p>Shipment: {value === "1" ? `3 €` : `Free`}</p>
+            <p>Total: {total} €</p>
+          </div>
         </div>
       );
     }
@@ -65,41 +79,37 @@ function CakeCard({ cake }: { cake: CakeWithQuantity }) {
 
       <div className="quantity-price-info">
         <Button className="change-quantity-button" onClick={decreaseQuantity}>
-          {" "}
-          -{" "}
+          {` - `}
         </Button>
         <span> {cake.quantity} </span>
         <Button className="change-quantity-button" onClick={increaseQuantity}>
-          {" "}
-          +{" "}
+          {` + `}
         </Button>
-        {cake.name} *
-        <span>
-          {cake.price} = {formatNumber(total)}
-        </span>
+        {`${cake.name} * ${cake.price} € = ${formatNumber(total)} €`}
       </div>
     </div>
   );
 }
 
-// function Quantity({cake}:CakeWithQuantity) {
-//     const context = useContext(CartContext);
 
-//     if (context) {
-//       const { cart, setCart } = context;
-//   function handleSubstract() {
-//     if ( cart.quantity> 0) setQuantity((q) => q - 1);
-//   }
 
-//   function handleAdd() {
-//     setQuantity((q) => q + 1);
-//   }
+export function ToggleButton({ value, setValue }) {
+  const handleChange = (event) => {
+    setValue(event.target.value);
+  };
 
-//   return (
-//     <div>
-//       <Button onClick={handleSubstract} >{<span>-</span>}</Button>
-//       <span>Quantity: {cake.quantity}</span>
-//       <AddButton onClick={handleAdd} />
-//     </div>
-//   );
-// }}
+  return (
+    <div>
+      <label className="">
+        <input
+          className="toggle-range"
+          type="range"
+          min="0"
+          max="1"
+          value={value}
+          onChange={handleChange}
+        ></input>
+      </label>
+    </div>
+  );
+}

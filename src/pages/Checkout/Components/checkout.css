@@ -20,20 +20,32 @@
   width: 2rem;
 }
 
-
-.quantity-price-info{
+.quantity-price-info {
   display: flex;
   align-items: center;
   gap: 0.5rem;
 }
-.change-quantity-button{
+.change-quantity-button {
   display: flex;
   justify-content: center;
- align-items: center;
+  align-items: center;
   background-color: var(--button-color);
   cursor: pointer;
   padding: 0.3rem;
   border-radius: 50%;
   height: 1.2rem;
   width: 1.2rem;
+}
+
+.toggle-range{
+  width: 3rem;
+  
+  accent-color: var(--button-color);
+}
+
+.shipment-toggle {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 }
