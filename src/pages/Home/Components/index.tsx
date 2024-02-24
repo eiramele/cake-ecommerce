@@ -5,6 +5,7 @@ import "/src/App.css";
 import Button from "../../../components/common/Button";
 import { getData } from "../../../services";
 import { CartContextType, useCartContext } from "../../../context";
+import { useData } from "../../../hooks";
 
 export interface Cake {
   id: number;
@@ -38,26 +39,27 @@ function CakeObj({ cake }: { cake: Cake }) {
 }
 
 export const CakeObjList: React.FC<CakeListProps> = ({ url }) => {
-  const [cakes, setCakes] = useState<Cake[] | null>([]);
-  const { cart, setCart } = useCartContext();
+  //const [cakes, setCakes] = useState<Cake[] | null>([]);
+  const { cart } = useCartContext();
+  const { cakes } = useData(url);
 
-  useEffect(
-    function () {
-      async function fetchCakes() {
-        try {
-          const data = await getData(url);
-          // const data = await response.json();
+  // useEffect(
+  //   function () {
+  //     async function fetchCakes() {
+  //       try {
+  //         const data = await getData(url);
+  //         // const data = await response.json();
 
-          setCakes(data);
-        } catch (error) {
-          console.error("Error loading content", error);
-          return null;
-        }
-      }
-      fetchCakes(); //posar-hi el controller? Jonas vídeo 156. O potser no cal posar-hi res, comprovar què fa elq uehi ha ara
-    },
-    [url]
-  );
+  //         setCakes(data);
+  //       } catch (error) {
+  //         console.error("Error loading content", error);
+  //         return null;
+  //       }
+  //     }
+  //     fetchCakes(); //posar-hi el controller? Jonas vídeo 156. O potser no cal posar-hi res, comprovar què fa elq uehi ha ara
+  //   },
+  //   [url]
+  // );
 
   // useEffect(
   //   function () {
@@ -68,7 +70,6 @@ export const CakeObjList: React.FC<CakeListProps> = ({ url }) => {
 
   useEffect(
     function () {
-      console.log('Actualitzant localStorage amb cart: 2', cart);
       if (cart.length > 0) {
         localStorage.setItem("cart", JSON.stringify([...cart]));
       } else {
@@ -78,7 +79,7 @@ export const CakeObjList: React.FC<CakeListProps> = ({ url }) => {
         if (cart.length === 0) localStorage.setItem("cart", JSON.stringify([]));
       };
     },
-    [cart] // Aquest efecte s'executarà cada vegada que l'estat 'cart' canviï
+    [cart]
   );
 
   return (
