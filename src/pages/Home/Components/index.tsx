@@ -39,6 +39,7 @@ function CakeObj({ cake }: { cake: Cake }) {
 
 export const CakeObjList: React.FC<CakeListProps> = ({ url }) => {
   const [cakes, setCakes] = useState<Cake[] | null>([]);
+  const { cart, setCart } = useCartContext();
 
   useEffect(
     function () {
@@ -53,9 +54,31 @@ export const CakeObjList: React.FC<CakeListProps> = ({ url }) => {
           return null;
         }
       }
-      fetchCakes();
+      fetchCakes(); //posar-hi el controller? Jonas vídeo 156. O potser no cal posar-hi res, comprovar què fa elq uehi ha ara
     },
     [url]
+  );
+
+  // useEffect(
+  //   function () {
+  //     localStorage.setItem("cart", JSON.stringify([...cart]));
+  //   },
+  //   [cart]
+  // );
+
+  useEffect(
+    function () {
+      console.log('Actualitzant localStorage amb cart: 2', cart);
+      if (cart.length > 0) {
+        localStorage.setItem("cart", JSON.stringify([...cart]));
+      } else {
+        localStorage.removeItem("cart");
+      }
+      return () => {
+        if (cart.length === 0) localStorage.setItem("cart", JSON.stringify([]));
+      };
+    },
+    [cart] // Aquest efecte s'executarà cada vegada que l'estat 'cart' canviï
   );
 
   return (
@@ -69,33 +92,10 @@ export const CakeObjList: React.FC<CakeListProps> = ({ url }) => {
 
 function SelectQuantity({ cake }: { cake: Cake }) {
   const [quantity, setQuantity] = useState<number>(1);
-  
+
   const contextCart = useCartContext();
-  
-  
-  // const addToCart = () => {
-  //   if (contextCart) {
-  //     const { cart, setCart } = contextCart;
-      
-
-  //     const cakeWithQuantity: CakeWithQuantity = { ...cake, quantity };
-  //     const existingCakeIndex = cart.findIndex(
-  //       (item) => item.id === cakeWithQuantity.id
-  //     );
-
-  //     if (existingCakeIndex >= 0) {
-  //       const updatedCart = [...cart];
-  //       updatedCart[existingCakeIndex].quantity += cakeWithQuantity.quantity;
-
-  //       setCart(updatedCart);
-  //     } else {
-  //       setCart([...cart, cakeWithQuantity]);
-  //     }
-  //   }
-  // };
 
   return (
-    
     <div className="quantity-container">
       <select
         className="select-quantity"
@@ -108,19 +108,23 @@ function SelectQuantity({ cake }: { cake: Cake }) {
           </option>
         ))}
       </select>
-      <Button className="add-to-cart--button" onClick={()=>addToCart(contextCart, cake, quantity,)}>
+      <Button
+        className="add-to-cart--button"
+        onClick={() => addToCart(contextCart, cake, quantity)}
+      >
         Add
       </Button>
     </div>
   );
 }
 
-
-
-export const addToCart = (contextCart:CartContextType, cake:Cake, quantity:number) => {
+export const addToCart = (
+  contextCart: CartContextType,
+  cake: Cake,
+  quantity: number
+) => {
   if (contextCart) {
     const { cart, setCart } = contextCart;
-    
 
     const cakeWithQuantity: CakeWithQuantity = { ...cake, quantity };
     const existingCakeIndex = cart.findIndex(
@@ -137,3 +141,23 @@ export const addToCart = (contextCart:CartContextType, cake:Cake, quantity:numbe
     }
   }
 };
+
+// const addToCart = () => {
+//   if (contextCart) {
+//     const { cart, setCart } = contextCart;
+
+//     const cakeWithQuantity: CakeWithQuantity = { ...cake, quantity };
+//     const existingCakeIndex = cart.findIndex(
+//       (item) => item.id === cakeWithQuantity.id
+//     );
+
+//     if (existingCakeIndex >= 0) {
+//       const updatedCart = [...cart];
+//       updatedCart[existingCakeIndex].quantity += cakeWithQuantity.quantity;
+
+//       setCart(updatedCart);
+//     } else {
+//       setCart([...cart, cakeWithQuantity]);
+//     }
+//   }
+// };

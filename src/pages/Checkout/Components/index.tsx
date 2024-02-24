@@ -1,30 +1,22 @@
-import { useContext, useState } from "react";
-import { CartContext } from "../../../context";
-import { CakeWithQuantity, addToCart } from "../../Home/Components";
+import { useContext, useEffect, useState } from "react";
+import { CartContext, useCartContext } from "../../../context";
+import { CakeWithQuantity } from "../../Home/Components";
 import "./checkout.css";
 import { formatNumber } from "../../../utils";
 import Button from "../../../components/common/Button";
 
 export function CakeCardTotal() {
-  const context = useContext(CartContext);
+  const context = useCartContext();
   const [value, setValue] = useState("0");
 
   if (context) {
     const { cart } = context;
 
-    const subtotal = formatNumber(
-      cart.reduce((acc, cake) => acc + cake.price * cake.quantity, 0)
-    );
-    const shipment = value === "0" ? 0 : 3;
-
-    const total = Number(subtotal) + shipment;
-
     if (cart.length === 0) {
       return <div>Your cart is empty</div>;
     } else {
-      //const finalPrice = cart.reduce((acc, cake) => acc + cake.total, 0);
       return (
-        <div>
+        <div className="checkout__container">
           <p>Your cart:</p>
           {cart.map((cake) => (
             <CakeCard key={cake.id} cake={cake} />
@@ -35,11 +27,7 @@ export function CakeCardTotal() {
             <ToggleButton value={value} setValue={setValue} />
             <span>{`Home delivery (+3 €)`}</span>
           </div>
-          <div>
-            <p> Subtotal: {`${subtotal} €`}</p>
-            <p>Shipment: {value === "1" ? `3 €` : `Free`}</p>
-            <p>Total: {total} €</p>
-          </div>
+          <Payment value={value} />
         </div>
       );
     }
@@ -86,12 +74,11 @@ function CakeCard({ cake }: { cake: CakeWithQuantity }) {
           {` + `}
         </Button>
         {`${cake.name} * ${cake.price} € = ${formatNumber(total)} €`}
+        <DeleteCake cake={cake} />
       </div>
     </div>
   );
 }
-
-
 
 export function ToggleButton({ value, setValue }) {
   const handleChange = (event) => {
@@ -111,5 +98,57 @@ export function ToggleButton({ value, setValue }) {
         ></input>
       </label>
     </div>
+  );
+}
+
+function Payment({ value }) {
+  const context = useCartContext();
+  const { cart, setCart } = context;
+
+  const subtotal = formatNumber(
+    cart.reduce((acc, cake) => acc + cake.price * cake.quantity, 0)
+  );
+  const shipment = value === "0" ? 0 : 3;
+
+  const total = Number(subtotal) + shipment;
+
+  function handlePayment() {
+    setCart([]);
+    localStorage.setItem("cart", JSON.stringify([]));
+  }
+  return (
+    <div className="payment-container">
+      <p> Subtotal: {`${subtotal} €`}</p>
+      <p>Shipment: {value === "1" ? `3 €` : `Free`}</p>
+      <p className="total-price">Total: {total.toFixed(2)} €</p>
+      <Button className="payment-button" onClick={handlePayment}>
+        Pay now
+      </Button>
+    </div>
+  );
+}
+
+function DeleteCake({ cake }) {
+  const context = useCartContext();
+  const { cart, setCart } = context;
+  // const [isMounted, setIsMounted] = useState(false); // Afegit per a controlar la muntatge
+
+  // useEffect(() => {
+  //   setIsMounted(true);
+  // }, []);
+
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify([...cart]));
+  }, [cart]);
+
+  function handleDelete() {
+    setCart((currentCart) => currentCart.filter((item) => item.id !== cake.id));
+    if (cart.length === 1) localStorage.removeItem("cart");
+  }
+
+  return (
+    <Button className="trash-icon" onClick={handleDelete}>
+      <img src="src/assets/trash-icon-24.png" />
+    </Button>
   );
 }

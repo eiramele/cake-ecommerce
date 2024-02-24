@@ -13,15 +13,16 @@ export interface CartContextType {
 //   setQuantity: React.Dispatch<React.SetStateAction<number>>;
 // }
 
-
 //Cart context
 export const CartContext = createContext<CartContextType | undefined>(
   undefined
 );
 
-
 export function CartContextProvider({ children }) {
-  const [cart, setCart] = useState<CakeWithQuantity[]>([]);
+  const [cart, setCart] = useState<CakeWithQuantity[]>(() => {
+    const storedCart = localStorage.getItem("cart");
+    return storedCart ? JSON.parse(storedCart) : [];
+  });
 
   const value = { cart, setCart };
 
@@ -34,9 +35,7 @@ export function useCartContext() {
     throw new Error("useCartContext must be used within a CartContextProvider");
   }
   return context;
-  
 }
-
 
 //Quantity context
 // export const QuantityContext = createContext<QuantityContextType | undefined>(
