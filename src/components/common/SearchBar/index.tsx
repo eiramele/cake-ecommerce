@@ -9,7 +9,7 @@ export default function SearchBar() {
       className="search-input"
       placeholder=" Search here!"
     ></input>
-    <Button className="search-button"><img src="src/assets/search-icon.png"/></Button></div>
+    <Button className="search-button"><img src="/src/assets/search-icon.png"/></Button></div>
     
   );
 }

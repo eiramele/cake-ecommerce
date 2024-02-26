@@ -1,0 +1,28 @@
+.product-detail {
+  margin: 2rem;
+}
+
+.cake-image-product {
+  height: 8rem;
+  width: 8rem;
+  margin-bottom: 1rem;
+}
+
+.cake-name {
+  color: var(--text-color);
+  padding-bottom: 2rem;
+}
+
+.cake-description {
+  padding-bottom: 1rem;
+  font-size: 1rem;
+}
+
+.cake-rating {
+  padding-bottom: 0.5rem;
+  font-size: 1.2rem;
+}
+
+.cake-price{
+    font-size: 1.2rem;
+}

@@ -3,9 +3,10 @@ import { useEffect, useState } from "react";
 import "./home.css";
 import "/src/App.css";
 import Button from "../../../components/common/Button";
-import { getData } from "../../../services";
+
 import { CartContextType, useCartContext } from "../../../context";
-import { useData } from "../../../hooks";
+import { useData, useLocalStorageCart } from "../../../hooks";
+import { Link } from "react-router-dom";
 
 export interface Cake {
   id: number;
@@ -26,15 +27,19 @@ interface CakeListProps {
 }
 
 function CakeObj({ cake }: { cake: Cake }) {
+  
+  const {id, price, image, name} = cake
   return (
-    <li className="cake-li">
-      <div className="image-container">
-        <img src={cake.image} className="cake-image" />
-      </div>
-      <h4>{cake.price} €</h4>
-      <h4>{cake.name}</h4>
-      <SelectQuantity cake={cake} />
-    </li>
+    <div className="cake-li">
+      <Link className="cake-link" to={`${id}`}>
+        <div className="image-container">
+          <img src={image} className="cake-image" />
+        </div>
+        <h4>{price} €</h4>
+        <h4>{name}</h4></Link>
+        <SelectQuantity cake={cake} />
+      
+    </div>
   );
 }
 
@@ -42,6 +47,8 @@ export const CakeObjList: React.FC<CakeListProps> = ({ url }) => {
   //const [cakes, setCakes] = useState<Cake[] | null>([]);
   const { cart } = useCartContext();
   const { cakes } = useData(url);
+
+  useLocalStorageCart(cart);
 
   // useEffect(
   //   function () {
@@ -68,19 +75,19 @@ export const CakeObjList: React.FC<CakeListProps> = ({ url }) => {
   //   [cart]
   // );
 
-  useEffect(
-    function () {
-      if (cart.length > 0) {
-        localStorage.setItem("cart", JSON.stringify([...cart]));
-      } else {
-        localStorage.removeItem("cart");
-      }
-      return () => {
-        if (cart.length === 0) localStorage.setItem("cart", JSON.stringify([]));
-      };
-    },
-    [cart]
-  );
+  // useEffect(
+  //   function () {
+  //     if (cart.length > 0) {
+  //       localStorage.setItem("cart", JSON.stringify([...cart]));
+  //     } else {
+  //       localStorage.removeItem("cart");
+  //     }
+  //     return () => {
+  //       if (cart.length === 0) localStorage.setItem("cart", JSON.stringify([]));
+  //     };
+  //   },
+  //   [cart]
+  // );
 
   return (
     <ul>
@@ -91,19 +98,19 @@ export const CakeObjList: React.FC<CakeListProps> = ({ url }) => {
   );
 };
 
-function SelectQuantity({ cake }: { cake: Cake }) {
+export function SelectQuantity({ cake }: { cake: Cake }) {
   const [quantity, setQuantity] = useState<number>(1);
 
   const contextCart = useCartContext();
 
   return (
-    <div className="quantity-container">
+    <li className="quantity-container">
       <select
         className="select-quantity"
         value={quantity}
         onChange={(e) => setQuantity(Number(e.target.value))}
       >
-        {Array.from({ length: 10 }, (_, i) => i + 1).map((num) => (
+        {Array.from({ length: cake.stock }, (_, i) => i + 1).map((num) => (
           <option value={num} key={num}>
             {num}
           </option>
@@ -115,7 +122,7 @@ function SelectQuantity({ cake }: { cake: Cake }) {
       >
         Add
       </Button>
-    </div>
+    </li>
   );
 }
 

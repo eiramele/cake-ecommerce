@@ -4,6 +4,7 @@ import { CakeWithQuantity } from "../../Home/Components";
 import "./checkout.css";
 import { formatNumber } from "../../../utils";
 import Button from "../../../components/common/Button";
+import { useLocalStorageCart } from "../../../hooks";
 
 export function CakeCardTotal() {
   const context = useCartContext();
@@ -131,15 +132,12 @@ function Payment({ value }) {
 function DeleteCake({ cake }) {
   const context = useCartContext();
   const { cart, setCart } = context;
-  // const [isMounted, setIsMounted] = useState(false); // Afegit per a controlar la muntatge
 
   // useEffect(() => {
-  //   setIsMounted(true);
-  // }, []);
-
-  useEffect(() => {
-    localStorage.setItem("cart", JSON.stringify([...cart]));
-  }, [cart]);
+  //   localStorage.setItem("cart", JSON.stringify([...cart]));
+  // }, [cart]);
+  
+  useLocalStorageCart(cart)
 
   function handleDelete() {
     setCart((currentCart) => currentCart.filter((item) => item.id !== cake.id));

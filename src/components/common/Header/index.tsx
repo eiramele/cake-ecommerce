@@ -14,7 +14,7 @@ const Header = () => {
 };
 
 const Logo = () => {
-  return <img src="src/assets/cakeApp_logo.webp" className="logo-image" />;
+  return <img src="/src/assets/cakeApp_logo.webp" className="logo-image" />;
 };
 
 export default Header;

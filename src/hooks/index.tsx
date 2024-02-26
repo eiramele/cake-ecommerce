@@ -2,10 +2,7 @@ import { useEffect, useState } from "react";
 import { getData } from "../services";
 import { Cake } from "../pages/Home/Components";
 
-/** Custom hooks are stored here. They are used to abstract logic from components and make it reusable.
- * The difference between hooks and utils is that hooks are used to abstract logic that is directly related to the application's business logic,
- * while utils are used to abstract logic that is not directly related to the application's business logic. */
-export function useData(url) {
+export function useData(url: string) {
   const [cakes, setCakes] = useState<Cake[] | null>([]);
 
   useEffect(
@@ -25,4 +22,20 @@ export function useData(url) {
     [url]
   );
   return { cakes, setCakes };
+}
+
+
+export function useLocalStorageCart(cart) {
+  useEffect(() => {
+    if (cart.length > 0) {
+      localStorage.setItem('cart', JSON.stringify([...cart]));
+    } else {
+      localStorage.removeItem('cart');
+    }
+
+    // Cleanup function
+    return () => {
+      if (cart.length === 0) localStorage.setItem('cart', JSON.stringify([]));
+    };
+  }, [cart]);
 }

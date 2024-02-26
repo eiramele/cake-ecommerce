@@ -12,7 +12,7 @@ export default function CartIcon() {
     return (
       <Link to="/checkout">
         <div className="icon-container">
-          <img src="src/assets/cart-icon-30.png" />
+          <img src="/src/assets/cart-icon-30.png" />
           {totalQuantity !== 0 && (
             <span className="cart-count">{totalQuantity}</span>
           )}
