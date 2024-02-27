@@ -1,6 +1,7 @@
 /** Services are used to make API calls and handle the response. */
 
 import { Cake } from "../pages/Home/Components";
+import { User } from "../pages/LogIn/Components";
 
 // import { User } from "../pages/LogIn/Components";
 
@@ -28,10 +29,10 @@ import { Cake } from "../pages/Home/Components";
 //   }
 // }
 
-export async function getData(url: string): Promise<Cake[] | null> {
+export async function getData<T>(url: string): Promise<T | null> {
   try {
     const response = await fetch(url);
-    const data = await response.json();
+    const data: T = await response.json();
     return data;
   } catch (error) {
     console.log(error)

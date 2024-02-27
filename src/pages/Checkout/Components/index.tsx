@@ -6,9 +6,9 @@ import { formatNumber } from "../../../utils";
 import Button from "../../../components/common/Button";
 import { useLocalStorageCart } from "../../../hooks";
 import { useNavigate } from "react-router-dom";
-import { HOME, THANKYOU } from "../../../routes/routing.routes";
+import { PAYMENT, THANKYOU } from "../../../routes/routing.routes";
 
-export function CakeCardTotal() {
+export function CakeCartTotal() {
   const context = useCartContext();
   const [value, setValue] = useState("0");
 
@@ -117,7 +117,7 @@ function Payment({ value }) {
   const total = Number(subtotal) + shipment;
 
   function handlePayment() {
-    navigate(THANKYOU);
+    navigate(PAYMENT);
     setCart([]);
     localStorage.setItem("cart", JSON.stringify([]));
   }

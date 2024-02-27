@@ -33,8 +33,7 @@
       "price": 17.5,
       "stock": 8,
       "image": "src/assets/images/carrot-cake.webp",
-      "description":
-        "Moist carrot cake with walnuts and a smooth cream cheese frosting.",
+      "description": "Moist carrot cake with walnuts and a smooth cream cheese frosting.",
       "rating": "4.6"
     },
     {
@@ -43,8 +42,7 @@
       "price": 16.75,
       "stock": 12,
       "image": "src/assets/images/strawberry-cake.webp",
-      "description":
-        "Light and fluffy shortcake with fresh strawberries and whipped cream.",
+      "description": "Light and fluffy shortcake with fresh strawberries and whipped cream.",
       "rating": "4.7"
     },
     {
@@ -53,55 +51,52 @@
       "price": 15,
       "stock": 9,
       "image": "src/assets/images/lemon-pie.webp",
-      "description":
-        "Tart and refreshing lemon pie with a buttery crust and meringue topping.",
+      "description": "Tart and refreshing lemon pie with a buttery crust and meringue topping.",
       "rating": "4.6"
     }
-  ],  
-    "users": [
-      {
-        "id": 1,
-        "name": "random_user_1",
-        "password": "RandomPassword1!",
-        "email": "random_user_1@example.com",
-        "cart": []
-      },
-      {
-        "id": 2,
-        "name": "random_user_2",
-        "password": "RandomPassword2!",
-        "email": "random_user_2@example.com",
-        "cart": []
-      },
-      {
-        "id": 3,
-        "name": "random_user_3",
-        "password": "RandomPassword3!",
-        "email": "random_user_3@example.com",
-        "cart": []
-      },
-      {
-        "id": 4,
-        "name": "random_user_4",
-        "password": "RandomPassword4!",
-        "email": "random_user_4@example.com",
-        "cart": []
-      },
-      {
-        "id": 5,
-        "name": "random_user_5",
-        "password": "RandomPassword5!",
-        "email": "random_user_5@example.com",
-        "cart": []
-      },
-      {
-        "id": 6,
-        "name": "random_user_6",
-        "password": "RandomPassword6!",
-        "email": "random_user_6@example.com",
-        "cart": []
-      }
-    ]
-  }
-  
-
+  ],
+  "users": [
+    {
+      "id": 1,
+      "name": "Ariadna",
+      "password": "AriadnaMM",
+      "email": "ariadna@example.com",
+      "cart": []
+    },
+    {
+      "id": 2,
+      "name": "Marti",
+      "password": "MartiMS",
+      "email": "marti@example.com",
+      "cart": []
+    },
+    {
+      "id": 3,
+      "name": "Eira",
+      "password": "EiraMG",
+      "email": "eira@example.com",
+      "cart": []
+    },
+    {
+      "id": 4,
+      "name": "Alberto",
+      "password": "AlbertoMH",
+      "email": "alberto@example.com",
+      "cart": []
+    },
+    {
+      "id": 5,
+      "name": "Neus",
+      "password": "NeusGL",
+      "email": "neus@example.com",
+      "cart": []
+    },
+    {
+      "id": 6,
+      "name": "random_user_6",
+      "password": "RandomPassword6!",
+      "email": "random_user_6@example.com",
+      "cart": []
+    }
+  ]
+}

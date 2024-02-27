@@ -1,12 +1,12 @@
-import { CakeCardTotal } from "../../pages/Checkout/Components";
+import { CakeCartTotal } from "../../pages/Checkout/Components";
 import { CakeObjList } from "../../pages/Home/Components";
 import LogIn from "../../pages/LogIn/Components";
+import Payment from "../../pages/PaymentDetails";
 import { ProductPage } from "../../pages/ProductPage/Components";
 import ThankYou from "../../pages/ThankYouPage";
 import Main from "../Main";
-import CartIcon from "../common/CartIcon/cart.css";
 import Header from "../common/Header";
-import SearchBar from "../common/SearchBar";
+import SearchCartLog from "../common/SearchCartLog";
 
 const cakesURL: string = "http://localhost:3000/cakes";
 
@@ -26,7 +26,7 @@ export function HomePage() {
     <>
       <Main>
         <Header />
-        <SearchandAddToCart />
+        <SearchCartLog />
         <CakeObjList url={cakesURL} />
       </Main>
     </>
@@ -38,19 +38,10 @@ export function CheckoutPage() {
     <>
       <Main>
         <Header />
-
-        <CakeCardTotal />
+        <SearchCartLog />
+        <CakeCartTotal />
       </Main>
     </>
-  );
-}
-
-export function SearchandAddToCart() {
-  return (
-    <div style={{ display: "flex", gap: "1rem" }}>
-      <SearchBar />
-      <CartIcon />
-    </div>
   );
 }
 
@@ -59,7 +50,7 @@ export function ProductPageLayout() {
     <>
       <Main>
         <Header />
-        <SearchandAddToCart />
+        <SearchCartLog />
         <ProductPage url={cakesURL} />
       </Main>
     </>
@@ -72,6 +63,17 @@ export function ThankYouPage() {
       <Main>
         <Header />
         <ThankYou />
+      </Main>
+    </>
+  );
+}
+
+export function PaymentPage() {
+  return (
+    <>
+      <Main>
+        <Header />
+        <Payment />
       </Main>
     </>
   );

@@ -4,7 +4,7 @@ import "./home.css";
 import "/src/App.css";
 import Button from "../../../components/common/Button";
 
-import { CartContextType, useCartContext } from "../../../context";
+import { CartContextType, useCartContext } from "../../../context/CartContext";
 import { useData, useLocalStorageCart } from "../../../hooks";
 import { Link } from "react-router-dom";
 
@@ -27,8 +27,7 @@ interface CakeListProps {
 }
 
 function CakeObj({ cake }: { cake: Cake }) {
-  
-  const {id, price, image, name} = cake
+  const { id, price, image, name } = cake;
   return (
     <div className="cake-li">
       <Link className="cake-link" to={`${id}`}>
@@ -36,9 +35,9 @@ function CakeObj({ cake }: { cake: Cake }) {
           <img src={image} className="cake-image" />
         </div>
         <h4>{price} €</h4>
-        <h4>{name}</h4></Link>
-        <SelectQuantity cake={cake} />
-      
+        <h4>{name}</h4>
+      </Link>
+      <SelectQuantity cake={cake} />
     </div>
   );
 }
