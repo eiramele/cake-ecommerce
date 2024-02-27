@@ -1,10 +1,12 @@
 import { useContext, useEffect, useState } from "react";
-import { CartContext, useCartContext } from "../../../context";
+import { CartContext, useCartContext } from "../../../context/CartContext";
 import { CakeWithQuantity } from "../../Home/Components";
 import "./checkout.css";
 import { formatNumber } from "../../../utils";
 import Button from "../../../components/common/Button";
 import { useLocalStorageCart } from "../../../hooks";
+import { useNavigate } from "react-router-dom";
+import { HOME, THANKYOU } from "../../../routes/routing.routes";
 
 export function CakeCardTotal() {
   const context = useCartContext();
@@ -105,6 +107,7 @@ export function ToggleButton({ value, setValue }) {
 function Payment({ value }) {
   const context = useCartContext();
   const { cart, setCart } = context;
+  const navigate = useNavigate();
 
   const subtotal = formatNumber(
     cart.reduce((acc, cake) => acc + cake.price * cake.quantity, 0)
@@ -114,6 +117,7 @@ function Payment({ value }) {
   const total = Number(subtotal) + shipment;
 
   function handlePayment() {
+    navigate(THANKYOU);
     setCart([]);
     localStorage.setItem("cart", JSON.stringify([]));
   }
@@ -133,11 +137,7 @@ function DeleteCake({ cake }) {
   const context = useCartContext();
   const { cart, setCart } = context;
 
-  // useEffect(() => {
-  //   localStorage.setItem("cart", JSON.stringify([...cart]));
-  // }, [cart]);
-  
-  useLocalStorageCart(cart)
+  useLocalStorageCart(cart);
 
   function handleDelete() {
     setCart((currentCart) => currentCart.filter((item) => item.id !== cake.id));

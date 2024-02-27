@@ -1,12 +1,25 @@
 import { CakeCardTotal } from "../../pages/Checkout/Components";
 import { CakeObjList } from "../../pages/Home/Components";
+import LogIn from "../../pages/LogIn/Components";
 import { ProductPage } from "../../pages/ProductPage/Components";
+import ThankYou from "../../pages/ThankYouPage";
 import Main from "../Main";
 import CartIcon from "../common/CartIcon/cart.css";
 import Header from "../common/Header";
 import SearchBar from "../common/SearchBar";
 
 const cakesURL: string = "http://localhost:3000/cakes";
+
+export function LoginPage() {
+  return (
+    <>
+      <Main>
+        <Header />
+        <LogIn />
+      </Main>
+    </>
+  );
+}
 
 export function HomePage() {
   return (
@@ -43,12 +56,23 @@ export function SearchandAddToCart() {
 
 export function ProductPageLayout() {
   return (
-    <div>
+    <>
       <Main>
         <Header />
         <SearchandAddToCart />
         <ProductPage url={cakesURL} />
       </Main>
-    </div>
+    </>
+  );
+}
+
+export function ThankYouPage() {
+  return (
+    <>
+      <Main>
+        <Header />
+        <ThankYou />
+      </Main>
+    </>
   );
 }
