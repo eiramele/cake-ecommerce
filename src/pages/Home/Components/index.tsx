@@ -8,6 +8,7 @@ import { CartContextType, useCartContext } from "../../../context/CartContext";
 import { useLocalStorageCart } from "../../../hooks";
 import { Link } from "react-router-dom";
 import { useCakes } from "../../../context/CakesContext";
+import { useFilter } from "../../../context/FilterContext";
 
 export interface Cake {
   id: number;
@@ -44,6 +45,7 @@ function CakeObj({ cake }: { cake: Cake }) {
 }
 
 export const CakeObjList: React.FC<CakeListProps> = ({ url }) => {
+  const {filter} = useFilter()
   const { cart } = useCartContext();
   const { cakes } = useCakes();
 
@@ -51,7 +53,10 @@ export const CakeObjList: React.FC<CakeListProps> = ({ url }) => {
 
   return (
     <ul>
-      {cakes?.map((cake) => (
+      {cakes.filter(cake=>{if (!filter) return true;
+    const name = cake.name.toLowerCase()
+    return name.includes(filter.toLowerCase())  
+    }).map((cake) => (
         <CakeObj cake={cake} key={cake.id} />
       ))}
     </ul>

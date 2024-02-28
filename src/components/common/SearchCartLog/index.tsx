@@ -5,7 +5,7 @@ import Logout from "../LogoutButton";
 import SearchBar from "../SearchBar";
 import "./searchcartlog.css";
 
-export default function SearchCartLog() {
+function SearchCartLog() {
   const { isAuthenticated } = useAuth();
 
   return (
@@ -16,3 +16,15 @@ export default function SearchCartLog() {
     </div>
   );
 }
+
+function CartLog() {
+  const { isAuthenticated } = useAuth();
+  return (
+    <div className="container">
+      <CartIcon />
+      {!isAuthenticated ? <LogInButton /> : <Logout />}
+    </div>
+  );
+}
+
+export { SearchCartLog, CartLog };

@@ -6,7 +6,7 @@ import { ProductPage } from "../../pages/ProductPage/Components";
 import ThankYou from "../../pages/ThankYouPage";
 import Main from "../Main";
 import Header from "../common/Header";
-import SearchCartLog from "../common/SearchCartLog";
+import { CartLog, SearchCartLog } from "../common/SearchCartLog";
 
 const cakesURL: string = "http://localhost:3000/cakes";
 
@@ -38,7 +38,7 @@ export function CheckoutPage() {
     <>
       <Main>
         <Header />
-        <SearchCartLog />
+        <CartLog />
         <CakeCartTotal />
       </Main>
     </>
@@ -50,7 +50,7 @@ export function ProductPageLayout() {
     <>
       <Main>
         <Header />
-        <SearchCartLog />
+        <CartLog />
         <ProductPage url={cakesURL} />
       </Main>
     </>
