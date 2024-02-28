@@ -1,9 +1,13 @@
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-import { useEffect } from "react";
+import { ReactNode, useEffect } from "react";
 import { LOGIN } from "./routing.routes";
 
-export default function PrivateRoute({ children }) {
+interface PrivateRouteProps {
+  children: ReactNode;
+}
+
+const PrivateRoute: React.FC<PrivateRouteProps> = ({ children }) => {
   const { isAuthenticated } = useAuth();
   const navigate = useNavigate();
 
@@ -14,4 +18,6 @@ export default function PrivateRoute({ children }) {
     [isAuthenticated, navigate]
   );
   return isAuthenticated ? children : null;
-}
+};
+
+export default PrivateRoute;

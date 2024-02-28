@@ -8,12 +8,7 @@ export interface CartContextType {
   cart: CakeWithQuantity[];
   setCart: React.Dispatch<React.SetStateAction<CakeWithQuantity[]>>;
 }
-// interface QuantityContextType {
-//   quantity: number;
-//   setQuantity: React.Dispatch<React.SetStateAction<number>>;
-// }
 
-//Cart context
 export const CartContext = createContext<CartContextType | undefined>(
   undefined
 );
@@ -36,24 +31,3 @@ export function useCartContext() {
   }
   return context;
 }
-
-//Quantity context
-// export const QuantityContext = createContext<QuantityContextType | undefined>(
-//   undefined
-// );
-
-// export function QuantityContextProvider({ children }) {
-//   const [quantity, setQuantity] = useState<number>(1);
-
-//   const value = { quantity, setQuantity };
-
-//   return <QuantityContext.Provider value={value}>{children}</QuantityContext.Provider>;
-// }
-
-// export function useQuantityContext() {
-//   const context = useContext(QuantityContext);
-//   if (!context) {
-//     throw new Error("useQuantityContext must be used within a QuantityContextProvider");
-//   }
-//   return context;
-// }

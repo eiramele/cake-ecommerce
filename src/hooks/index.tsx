@@ -9,7 +9,7 @@ export function useData(url: string) {
     function () {
       async function fetchCakes() {
         try {
-          const data = await getData(url);
+          const data: Cake[] | null = await getData(url);
 
           setCakes(data);
         } catch (error) {

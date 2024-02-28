@@ -2,6 +2,8 @@ import Button from "../Button";
 import "./searchbar.css";
 
 export default function SearchBar() {
+  
+  
   return (
     <div className="search-box">
     <input

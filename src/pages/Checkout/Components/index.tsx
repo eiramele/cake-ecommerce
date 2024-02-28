@@ -118,7 +118,7 @@ function Payment({ value }) {
 
   function handlePayment() {
     navigate(PAYMENT);
-    setCart([]);
+    // setCart([]);
     localStorage.setItem("cart", JSON.stringify([]));
   }
   return (
