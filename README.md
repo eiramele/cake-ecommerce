@@ -14,7 +14,7 @@ This mobile-first e-commerce application is designed specifically for cake sales
 
 - **User Authentication**: Secure login functionality to access payment features.
 
-- **Search Products**:  
+- **Search Products**: Search cakes on search bar
 
 ## Getting Started
 
@@ -63,7 +63,7 @@ After starting the development server, the application will be available at http
 
 - React: For building the user interface.
 
-- React-router-dom: Library to define rutes between private pages 
+- React-router-dom: Library to define rutes between private pages
 
 - TypeScript: For adding static type definitions to JavaScript.
 
