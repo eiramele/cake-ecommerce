@@ -1,12 +1,12 @@
 import { useContext, useEffect, useState } from "react";
 import { CartContext, useCartContext } from "../../../context/CartContext";
 import { CakeWithQuantity } from "../../Home/Components";
-import "./checkout.css";
 import { formatNumber } from "../../../utils";
 import Button from "../../../components/common/Button";
 import { useLocalStorageCart } from "../../../hooks";
 import { useNavigate } from "react-router-dom";
-import { PAYMENT, THANKYOU } from "../../../routes/routing.routes";
+import { PAYMENT } from "../../../routes/routing.routes";
+import "./checkout.css";
 
 export function CakeCartTotal() {
   const context = useCartContext();

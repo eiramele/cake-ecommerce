@@ -1,4 +1,4 @@
-/* .checkout__container {
+.checkout__container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -59,7 +59,7 @@
   margin-bottom: 2rem;
 }
 
-.total-price{
+.total-price {
   font-size: 1.3em;
   padding-top: 0.5rem;
 }
@@ -76,4 +76,4 @@
   width: 20rem;
   padding: 2rem;
   border: solid var(--button-color);
-} */
+}

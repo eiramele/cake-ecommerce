@@ -31,7 +31,7 @@ export default function ProductPage({ url }: { url: string }) {
   if (!cake) {
     return <div>Loading...</div>;
   }
-console.log(cake)
+
   return (
     
     <div className='product-detail'>
