@@ -1,8 +1,8 @@
 /** Context files are used to store the context providers and the context itself. */
 
-import { createContext, useState, useContext } from "react";
+import { createContext, useContext } from "react";
 
-import { Cake, CakeWithQuantity } from "../pages/Home/Components";
+import { Cake } from "../pages/Home/Components";
 import { useData } from "../hooks";
 const cakesURL: string = "http://localhost:3000/cakes";
 
@@ -16,7 +16,7 @@ export const CakesContext = createContext<CakesContextType | undefined>(
 );
 
 export function CakesContextProvider({ children }) {
-  const { cakes, setCakes } = useData(cakesURL);
+  const { cakes } = useData(cakesURL);
 
   const value = { cakes };
 

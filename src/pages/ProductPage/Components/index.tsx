@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import "./productpage.css"
 import { Cake, SelectQuantity } from '../../Home/Components';
 
-export function ProductPage({ url }: { url: string }) {
+export default function ProductPage({ url }: { url: string }) {
   const { id } = useParams();
   const [cake, setCake] = useState<Cake | null>(null);
   const [error, setError] = useState<string | null>(null);

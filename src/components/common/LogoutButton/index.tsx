@@ -1,5 +1,5 @@
 import { useAuth } from "../../../context/AuthContext";
-import Button from "../Button";
+import { Button } from "../../common";
 import "./logoutbutton.css";
 
 export default function Logout() {

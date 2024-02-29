@@ -1,11 +1,11 @@
-/* .checkout__container {
+.checkout__container {
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-top: 1rem;
 }
 
-.product-info__container {
+.productInfo__container {
   display: flex;
   gap: 1rem;
   justify-content: center;
@@ -23,19 +23,19 @@
   border-radius: 0.6rem;
 }
 
-.cake-image--mini {
+.cakeImage_Mini {
   height: 2rem;
   width: 2rem;
 }
 
-.quantity-price-info {
+.quantityPriceInfo {
   display: flex;
   align-items: center;
   gap: 0.5rem;
   font-size: 0.8rem;
   min-width: 20rem;
 }
-.change-quantity-button {
+.changeQuantityButton {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -47,33 +47,33 @@
   width: 1.2rem;
 }
 
-.toggle-range {
+.toggleRange {
   width: 2rem;
   accent-color: var(--button-color);
 }
 
-.shipment-toggle {
+.shipmentToggle {
   display: flex;
   gap: 1rem;
   margin-top: 2rem;
   margin-bottom: 2rem;
 }
 
-.total-price{
+.totalPrice {
   font-size: 1.3em;
   padding-top: 0.5rem;
 }
 
-.buy-button {
+.paymentButton {
   background-color: var(--button-color);
   color: white;
   margin-top: 1rem;
 }
 
-.payment-container {
+.paymentContainer {
   display: flex;
   flex-direction: column;
   width: 20rem;
   padding: 2rem;
   border: solid var(--button-color);
-} */
+}

@@ -116,18 +116,18 @@ function Payment({ value }) {
 
   const total = Number(subtotal) + shipment;
 
-  function handlePayment() {
+  function handleClick() {
     navigate(PAYMENT);
     // setCart([]);
     localStorage.setItem("cart", JSON.stringify([]));
   }
   return (
-    <div className="payment-container">
+    <div className="buy-container">
       <p> Subtotal: {`${subtotal} €`}</p>
       <p>Shipment: {value === "1" ? `3 €` : `Free`}</p>
       <p className="total-price">Total: {total.toFixed(2)} €</p>
-      <Button className="payment-button" onClick={handlePayment}>
-        Pay now
+      <Button className="payment-button" onClick={handleClick}>
+        Buy now
       </Button>
     </div>
   );

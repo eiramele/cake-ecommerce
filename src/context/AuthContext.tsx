@@ -49,6 +49,8 @@ function AuthProvider({ children }) {
 
       if (user) {
         dispatch({ type: "login", payload: user });
+      } else {
+        alert("User not found");
       }
     } catch (error) {
       console.error("Error fetching users");

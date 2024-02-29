@@ -2,11 +2,10 @@ import { CakeCartTotal } from "../../pages/Checkout/Components";
 import { CakeObjList } from "../../pages/Home/Components";
 import LogIn from "../../pages/LogIn/Components";
 import Payment from "../../pages/PaymentDetails";
-import { ProductPage } from "../../pages/ProductPage/Components";
+import ProductPage from "../../pages/ProductPage/Components";
 import ThankYou from "../../pages/ThankYouPage";
 import Main from "../Main";
-import Header from "../common/Header";
-import { CartLog, SearchCartLog } from "../common/SearchCartLog";
+import { Header, CartLog, SearchCartLog } from "../../components/common";
 
 const cakesURL: string = "http://localhost:3000/cakes";
 

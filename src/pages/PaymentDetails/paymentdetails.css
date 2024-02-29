@@ -1,0 +1,19 @@
+.payment-icons {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+}
+
+.payment-icon {
+  width: 3rem;
+  height: 3rem;
+  border: solid white;
+  padding: 0.2rem;
+  border-radius: 10%;
+}
+
+.payment-button {
+  background-color: var(--button-color);
+  color: white;
+  margin-top: 1rem;
+}
