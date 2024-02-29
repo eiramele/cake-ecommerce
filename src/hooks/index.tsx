@@ -18,7 +18,7 @@ export function useData(url: string) {
           return null;
         }
       }
-      fetchCakes(); //posar-hi el controller? Jonas vídeo 156. O potser no cal posar-hi res, comprovar què fa elq uehi ha ara
+      fetchCakes(); 
     },
     [url]
   );

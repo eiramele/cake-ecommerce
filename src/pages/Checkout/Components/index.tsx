@@ -122,8 +122,7 @@ function Payment({ value }: { value: string }) {
 
   function handleClick() {
     navigate(PAYMENT);
-    // setCart([]);
-    localStorage.setItem("cart", JSON.stringify([]));
+    //localStorage.setItem("cart", JSON.stringify([]));
   }
   return (
     <div className="buy-container">
