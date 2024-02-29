@@ -1,4 +1,10 @@
-import { createContext, useContext, useReducer } from "react";
+import {
+  FunctionComponent,
+  ReactNode,
+  createContext,
+  useContext,
+  useReducer,
+} from "react";
 import { getData } from "../services";
 import { User } from "../pages/LogIn/Components";
 
@@ -12,6 +18,21 @@ interface AuthContextType extends AuthState {
   logout: () => void;
 }
 
+interface AuthProviderProps {
+  children: ReactNode;
+}
+
+interface LoginAction {
+  type: "login";
+  payload: User;
+}
+
+interface LogoutAction {
+  type: "logout";
+}
+
+type AuthAction = LoginAction | LogoutAction;
+
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 const initialState: AuthState = {
@@ -19,10 +40,7 @@ const initialState: AuthState = {
   isAuthenticated: false,
 };
 
-function reducer(
-  state: AuthState,
-  action: { type: string; payload?: any }
-): AuthState {
+function reducer(state: AuthState, action: AuthAction): AuthState {
   switch (action.type) {
     case "login":
       return { ...state, user: action.payload, isAuthenticated: true };
@@ -33,7 +51,7 @@ function reducer(
   }
 }
 
-function AuthProvider({ children }) {
+const AuthProvider: FunctionComponent<AuthProviderProps> = ({ children }) => {
   const [{ user, isAuthenticated }, dispatch] = useReducer(
     reducer,
     initialState
@@ -66,7 +84,7 @@ function AuthProvider({ children }) {
       {children}
     </AuthContext.Provider>
   );
-}
+};
 
 function useAuth() {
   const context = useContext(AuthContext);

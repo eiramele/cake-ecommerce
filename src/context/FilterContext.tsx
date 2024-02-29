@@ -1,9 +1,26 @@
-import { createContext, useContext, useState } from "react";
+import {
+  FunctionComponent,
+  ReactNode,
+  createContext,
+  useContext,
+  useState,
+} from "react";
 
-const FilterContext = createContext();
+interface FilterContextType {
+  filter: string;
+  handleSetFilter: (newValue: string) => void;
+}
 
-export const FilterProvider = ({ children }) => {
-  const [filter, setFilter] = useState("");
+const FilterContext = createContext<FilterContextType | undefined>(undefined);
+
+interface FilterProviderProps {
+  children: ReactNode;
+}
+
+export const FilterProvider: FunctionComponent<FilterProviderProps> = ({
+  children,
+}) => {
+  const [filter, setFilter] = useState<string>("");
 
   const handleSetFilter = (newValue: string) => {
     setFilter(newValue);
@@ -16,6 +33,10 @@ export const FilterProvider = ({ children }) => {
   );
 };
 
-export function useFilter() {
-  return useContext(FilterContext);
+export function useFilter(): FilterContextType {
+  const context = useContext(FilterContext);
+  if (context === undefined) {
+    throw new Error("useFilter must be used within a FilterProvider");
+  }
+  return context;
 }

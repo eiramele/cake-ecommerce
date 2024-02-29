@@ -1,19 +1,27 @@
-/** Context files are used to store the context providers and the context itself. */
 
-import { createContext, useState, useContext } from "react";
 
-import { CakeWithQuantity } from "../pages/Home/Components";
+import { createContext, useState, useContext, ReactNode } from "react";
+import { Cake } from "./CakesContext";
 
+export interface CakeWithQuantity extends Cake {
+  quantity: number;
+}
 export interface CartContextType {
   cart: CakeWithQuantity[];
   setCart: React.Dispatch<React.SetStateAction<CakeWithQuantity[]>>;
+}
+
+interface CartContextProviderProps {
+  children: ReactNode;
 }
 
 export const CartContext = createContext<CartContextType | undefined>(
   undefined
 );
 
-export function CartContextProvider({ children }) {
+export const CartContextProvider: React.FC<CartContextProviderProps> = ({
+  children,
+}) => {
   const [cart, setCart] = useState<CakeWithQuantity[]>(() => {
     const storedCart = localStorage.getItem("cart");
     return storedCart ? JSON.parse(storedCart) : [];
@@ -22,7 +30,7 @@ export function CartContextProvider({ children }) {
   const value = { cart, setCart };
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
-}
+};
 
 export function useCartContext() {
   const context = useContext(CartContext);

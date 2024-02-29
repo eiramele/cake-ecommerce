@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Button } from "../../common";
+import { Button } from "..";
 import "./loginbutton.css";
 import { LOGIN } from "../../../routes/routing.routes";
 

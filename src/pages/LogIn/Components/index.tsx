@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import Button from "../../../components/common/Button";
-import { Cake } from "../../Home/Components";
+
 import "./login.css";
 import { useAuth } from "../../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { HOME } from "../../../routes/routing.routes";
+import { Cake } from "../../../context/CakesContext";
 
 export interface User {
   id: number;
@@ -22,14 +23,14 @@ export default function LogIn() {
   const { login, isAuthenticated } = useAuth();
   const navigate = useNavigate();
 
-  function handleSubmit(e) {
-    e.preventDefault();
+  function handleSubmit(event) {
+    event.preventDefault();
     if (email && password) login(email, password);
   }
 
   useEffect(
     function () {
-      if (isAuthenticated) navigate(HOME, {replace:true});
+      if (isAuthenticated) navigate(HOME, { replace: true });
     },
     [isAuthenticated, navigate]
   );

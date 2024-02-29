@@ -1,12 +1,16 @@
-import { useContext, useEffect, useState } from "react";
-import { CartContext, useCartContext } from "../../../context/CartContext";
-import { CakeWithQuantity } from "../../Home/Components";
-import "./checkout.css";
+import { useContext, useState } from "react";
+import {
+  CakeWithQuantity,
+  CartContext,
+  useCartContext,
+} from "../../../context/CartContext";
+
 import { formatNumber } from "../../../utils";
 import Button from "../../../components/common/Button";
 import { useLocalStorageCart } from "../../../hooks";
 import { useNavigate } from "react-router-dom";
-import { PAYMENT, THANKYOU } from "../../../routes/routing.routes";
+import { PAYMENT } from "../../../routes/routing.routes";
+import "./checkout.css";
 
 export function CakeCartTotal() {
   const context = useCartContext();
@@ -43,7 +47,7 @@ function CakeCard({ cake }: { cake: CakeWithQuantity }) {
   const { setCart } = context;
 
   function decreaseQuantity() {
-    setCart((currentCart) => {
+    setCart((currentCart: CakeWithQuantity[]) => {
       return currentCart.map((item) => {
         if (item.id === cake.id && item.quantity > 1) {
           return { ...item, quantity: item.quantity - 1 };
@@ -54,7 +58,7 @@ function CakeCard({ cake }: { cake: CakeWithQuantity }) {
   }
 
   function increaseQuantity() {
-    setCart((currentCart) => {
+    setCart((currentCart: CakeWithQuantity[]) => {
       return currentCart.map((item) => {
         if (item.id === cake.id) {
           return { ...item, quantity: item.quantity + 1 };
@@ -104,9 +108,9 @@ export function ToggleButton({ value, setValue }) {
   );
 }
 
-function Payment({ value }) {
+function Payment({ value }: { value: string }) {
   const context = useCartContext();
-  const { cart, setCart } = context;
+  const { cart } = context;
   const navigate = useNavigate();
 
   const subtotal = formatNumber(
@@ -133,7 +137,7 @@ function Payment({ value }) {
   );
 }
 
-function DeleteCake({ cake }) {
+function DeleteCake({ cake }: { cake: CakeWithQuantity }) {
   const context = useCartContext();
   const { cart, setCart } = context;
 

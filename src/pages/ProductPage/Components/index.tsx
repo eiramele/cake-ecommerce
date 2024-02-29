@@ -1,8 +1,8 @@
-
-import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import "./productpage.css"
-import { Cake, SelectQuantity } from '../../Home/Components';
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import "./productpage.css";
+import { SelectQuantity } from "../../Home/Components";
+import { Cake } from "../../../context/CakesContext";
 
 export default function ProductPage({ url }: { url: string }) {
   const { id } = useParams();
@@ -22,7 +22,11 @@ export default function ProductPage({ url }: { url: string }) {
     }
 
     fetchCake();
-  }, [id, url]); 
+  }, [id, url]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   if (error) {
     return <div>Error loading cake: {error}</div>;
@@ -31,17 +35,15 @@ export default function ProductPage({ url }: { url: string }) {
   if (!cake) {
     return <div>Loading...</div>;
   }
-console.log(cake)
+
   return (
-    
-    <div className='product-detail'>
+    <div className="product-detail">
       <img src={`/${cake.image}`} className="cake-image-product" />
-      <h3 className='cake-name'>{cake.name}</h3>
-      <p className='cake-description'>{cake.description}</p>
-      <p className='cake-rating'>⭐ {cake.rating}</p>
-      <span className='cake-price'>{cake.price} €</span>
-      <SelectQuantity cake={cake}/>
-      
+      <h3 className="cake-name">{cake.name}</h3>
+      <p className="cake-description">{cake.description}</p>
+      <p className="cake-rating">⭐ {cake.rating}</p>
+      <span className="cake-price">{cake.price} €</span>
+      <SelectQuantity cake={cake} />
     </div>
   );
 }
