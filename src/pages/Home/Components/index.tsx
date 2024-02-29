@@ -1,28 +1,17 @@
-import { useEffect, useState } from "react";
-// import { getCakes, getData } from "../../../services";
+import { useState } from "react";
 import "./home.css";
 import "/src/App.css";
-import Button from "../../../components/common/Button";
+import { Button } from "../../../components/common";
 
-import { CartContextType, useCartContext } from "../../../context/CartContext";
+import {
+  CakeWithQuantity,
+  CartContextType,
+  useCartContext,
+} from "../../../context/CartContext";
 import { useLocalStorageCart } from "../../../hooks";
 import { Link } from "react-router-dom";
-import { useCakes } from "../../../context/CakesContext";
+import { Cake, useCakes } from "../../../context/CakesContext";
 import { useFilter } from "../../../context/FilterContext";
-
-export interface Cake {
-  id: number;
-  name: string;
-  price: number;
-  stock: number;
-  image: string;
-  description: string;
-  rating: string;
-}
-
-export interface CakeWithQuantity extends Cake {
-  quantity: number;
-}
 
 interface CakeListProps {
   url: string;
@@ -44,8 +33,8 @@ function CakeObj({ cake }: { cake: Cake }) {
   );
 }
 
-export const CakeObjList: React.FC<CakeListProps> = ({ url }) => {
-  const {filter} = useFilter()
+export const CakeObjList: React.FC<CakeListProps> = () => {
+  const { filter } = useFilter();
   const { cart } = useCartContext();
   const { cakes } = useCakes();
 
@@ -53,12 +42,15 @@ export const CakeObjList: React.FC<CakeListProps> = ({ url }) => {
 
   return (
     <ul>
-      {cakes.filter(cake=>{if (!filter) return true;
-    const name = cake.name.toLowerCase()
-    return name.includes(filter.toLowerCase())  
-    }).map((cake) => (
-        <CakeObj cake={cake} key={cake.id} />
-      ))}
+      {cakes
+        .filter((cake) => {
+          if (!filter) return true;
+          const name = cake.name.toLowerCase();
+          return name.includes(filter.toLowerCase());
+        })
+        .map((cake) => (
+          <CakeObj cake={cake} key={cake.id} />
+        ))}
     </ul>
   );
 };

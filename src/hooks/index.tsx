@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getData } from "../services";
-import { Cake } from "../pages/Home/Components";
+import { Cake } from "../context/CakesContext";
+import { CakeWithQuantity } from "../context/CartContext";
 
 export function useData(url: string) {
   const [cakes, setCakes] = useState<Cake[] | null>([]);
@@ -24,18 +25,17 @@ export function useData(url: string) {
   return { cakes, setCakes };
 }
 
-
-export function useLocalStorageCart(cart) {
+export function useLocalStorageCart(cart: CakeWithQuantity[]) {
   useEffect(() => {
     if (cart.length > 0) {
-      localStorage.setItem('cart', JSON.stringify([...cart]));
+      localStorage.setItem("cart", JSON.stringify([...cart]));
     } else {
-      localStorage.removeItem('cart');
+      localStorage.removeItem("cart");
     }
 
     // Cleanup function
     return () => {
-      if (cart.length === 0) localStorage.setItem('cart', JSON.stringify([]));
+      if (cart.length === 0) localStorage.setItem("cart", JSON.stringify([]));
     };
   }, [cart]);
 }
